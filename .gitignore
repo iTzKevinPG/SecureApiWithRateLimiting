@@ -1,0 +1,19 @@
+# Visual Studio files
+.vs/
+*.user
+*.suo
+*.vcxproj.user
+
+# Build results
+bin/
+obj/
+*.dll
+*.pdb
+
+# Logs and databases
+*.log
+*.db
+
+# Other unnecessary files
+.idea/
+.vscode/
