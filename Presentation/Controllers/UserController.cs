@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using SecureApiWithRateLimiting.Application.DTOs;
 using SecureApiWithRateLimiting.Application.Interfaces;
 using SecureApiWithRateLimiting.Domain.Entities;
@@ -19,6 +20,7 @@ namespace SecureApiWithRateLimiting.Presentation.Controllers
 
         [HttpGet("{id}")]
         [Authorize(Policy = "UserOrAdmin")]
+        [EnableRateLimiting("MediumRate")]
         public async Task<IActionResult> GetUserById(int id)
         {
             var user = await _userService.GetUserByIdAsync(id);
@@ -30,6 +32,7 @@ namespace SecureApiWithRateLimiting.Presentation.Controllers
 
         [HttpGet]
         [Authorize(Policy = "AdminOnly")]
+        [EnableRateLimiting("HighRate")]
         public async Task<IActionResult> GetAllUsers()
         {
             var users = await _userService.GetAllUsersAsync();
@@ -38,10 +41,28 @@ namespace SecureApiWithRateLimiting.Presentation.Controllers
 
         [HttpPost]
         [Authorize(Policy = "AdminOnly")]
+        [EnableRateLimiting("LowRate")]
         public async Task<IActionResult> CreateUser([FromBody] CreateUserRequest userRequest)
         {
             await _userService.CreateUserAsync(userRequest);
             return CreatedAtAction(nameof(GetUserById), new { id = userRequest.UserName }, userRequest);
+        }
+
+        [HttpPost("generate-report")]
+        [Authorize(Policy = "AdminOnly")] 
+        [EnableRateLimiting("LowRateWithConcurrency")]
+        public IActionResult GenerateReport([FromBody] string request)
+        {
+            Thread.Sleep(3000);
+            return Ok(new { Message = "Report generated successfully!" });
+        }
+
+        [HttpPost("generate-report-throttling")]
+        [Authorize(Policy = "AdminOnly")]
+        [EnableRateLimiting("Throttling")]
+        public IActionResult GenerateReportThrottling([FromBody] string request)
+        {
+            return Ok(new { Message = "Report generated successfully!" });
         }
     }
 }

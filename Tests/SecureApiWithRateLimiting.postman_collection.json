@@ -1,0 +1,132 @@
+{
+	"info": {
+		"_postman_id": "33cff69e-6994-4d83-91c6-b107b86b0e53",
+		"name": "SecureApiWithRateLimiting",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20078850"
+	},
+	"item": [
+		{
+			"name": "Login-Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200); // Verifica que el estado sea 200\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has the required fields\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object'); // Verifica que la respuesta sea un objeto\r",
+							"    pm.expect(responseData).to.have.property('token'); // Verifica que tenga el campo 'token'\r",
+							"    pm.expect(responseData.token).to.have.lengthOf.at.least(1); // Verifica que el token no esté vacío\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Rate limiting returns 429 after exceeding the limit\", function () {\r",
+							"    if (pm.response.code === 429) {\r",
+							"        pm.test(\"Rate limiting message is correct\", function () {\r",
+							"            const errorMessage = pm.response.text();\r",
+							"            pm.expect(errorMessage).to.include(\"You have exceeded the limit of requests\");\r",
+							"        });\r",
+							"    } else {\r",
+							"        pm.test(\"Response status code is 200 for valid requests\", function () {\r",
+							"            pm.response.to.have.status(200);\r",
+							"        });\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Unauthorized response for invalid credentials\", function () {\r",
+							"    if (pm.request.body) {\r",
+							"        const requestBody = JSON.parse(pm.request.body);\r",
+							"        if (!requestBody.userName || !requestBody.password) {\r",
+							"            pm.response.to.have.status(400); // Si el cuerpo está vacío o incompleto\r",
+							"        } else {\r",
+							"            pm.response.to.have.status(401); // Si las credenciales son incorrectas\r",
+							"        }\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"pm.test(\"JWT token is valid\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    // Verifica que la respuesta contiene un token\r",
+							"    pm.expect(responseData).to.have.property('token');\r",
+							"    const token = responseData.token;\r",
+							"    \r",
+							"    // Divide el token en las 3 partes (header, payload, signature)\r",
+							"    const parts = token.split('.');\r",
+							"    pm.expect(parts).to.have.lengthOf(3); // JWT debe tener 3 partes\r",
+							"\r",
+							"    // Decodifica el payload (parte 2 del token)\r",
+							"    const payloadBase64 = parts[1].replace(/-/g, '+').replace(/_/g, '/'); // Normaliza para base64\r",
+							"    const payloadJson = JSON.parse(atob(payloadBase64));\r",
+							"    \r",
+							"    // Verifica campos esperados en el payload\r",
+							"    pm.test(\"Payload contains required fields\", function () {\r",
+							"        pm.expect(payloadJson).to.have.property('sub'); // Identificador del usuario\r",
+							"        pm.expect(payloadJson).to.have.property('http://schemas.microsoft.com/ws/2008/06/identity/claims/role'); // Rol del usuario\r",
+							"        pm.expect(payloadJson).to.have.property('exp'); // Expiración del token\r",
+							"    });\r",
+							"\r",
+							"    // Valida que la expiración no haya pasado\r",
+							"    const now = Math.floor(Date.now() / 1000); // Tiempo actual en segundos\r",
+							"    pm.test(\"Token has not expired\", function () {\r",
+							"        pm.expect(payloadJson.exp).to.be.above(now);\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Error responses do not expose sensitive information\", function () {\r",
+							"    const responseCode = pm.response.code;\r",
+							"    if (responseCode === 400 || responseCode === 401) {\r",
+							"        const responseBody = pm.response.json();\r",
+							"        pm.expect(responseBody).to.be.an('object');\r",
+							"        pm.expect(responseBody).to.not.have.property('stackTrace'); // No debe mostrar errores internos\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userName\": \"kevinDev\",\r\n  \"password\": \"User123.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5182/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5182",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

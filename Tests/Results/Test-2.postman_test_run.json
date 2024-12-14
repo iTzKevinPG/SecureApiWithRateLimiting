@@ -1,0 +1,261 @@
+{
+	"id": "327864b3-7658-42d7-a0b5-f8088ff1e0db",
+	"name": "SecureApiWithRateLimiting",
+	"timestamp": "2024-12-14T18:15:14.538Z",
+	"collection_id": "20078850-33cff69e-6994-4d83-91c6-b107b86b0e53",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 95,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2024-12-14T18:15:12.316Z",
+	"totalFail": 30,
+	"results": [
+		{
+			"id": "12d54ba2-2b11-4445-a9c3-34fe65f6f369",
+			"name": "Login-Test",
+			"url": "http://localhost:5182/api/auth/login",
+			"time": 2,
+			"responseCode": {
+				"code": 429,
+				"name": "Too Many Requests"
+			},
+			"tests": {
+				"Response status code is 200": false,
+				"Response has the required fields": false,
+				"Rate limiting message is correct": true,
+				"Rate limiting returns 429 after exceeding the limit": true,
+				"Unauthorized response for invalid credentials": false,
+				"JWT token is valid": false,
+				"Error responses do not expose sensitive information": true
+			},
+			"testPassFailCounts": {
+				"Response status code is 200": {
+					"pass": 10,
+					"fail": 5
+				},
+				"Response has the required fields": {
+					"pass": 10,
+					"fail": 5
+				},
+				"Response status code is 200 for valid requests": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Rate limiting returns 429 after exceeding the limit": {
+					"pass": 15,
+					"fail": 0
+				},
+				"Unauthorized response for invalid credentials": {
+					"pass": 0,
+					"fail": 15
+				},
+				"Payload contains required fields": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Token has not expired": {
+					"pass": 10,
+					"fail": 0
+				},
+				"JWT token is valid": {
+					"pass": 10,
+					"fail": 5
+				},
+				"Error responses do not expose sensitive information": {
+					"pass": 15,
+					"fail": 0
+				},
+				"Rate limiting message is correct": {
+					"pass": 5,
+					"fail": 0
+				}
+			},
+			"times": [
+				11,
+				14,
+				11,
+				6,
+				7,
+				6,
+				6,
+				6,
+				7,
+				6,
+				1,
+				2,
+				1,
+				1,
+				2
+			],
+			"allTests": [
+				{
+					"Response status code is 200": true,
+					"Response has the required fields": true,
+					"Response status code is 200 for valid requests": true,
+					"Rate limiting returns 429 after exceeding the limit": true,
+					"Unauthorized response for invalid credentials": false,
+					"Payload contains required fields": true,
+					"Token has not expired": true,
+					"JWT token is valid": true,
+					"Error responses do not expose sensitive information": true
+				},
+				{
+					"Response status code is 200": true,
+					"Response has the required fields": true,
+					"Response status code is 200 for valid requests": true,
+					"Rate limiting returns 429 after exceeding the limit": true,
+					"Unauthorized response for invalid credentials": false,
+					"Payload contains required fields": true,
+					"Token has not expired": true,
+					"JWT token is valid": true,
+					"Error responses do not expose sensitive information": true
+				},
+				{
+					"Response status code is 200": true,
+					"Response has the required fields": true,
+					"Response status code is 200 for valid requests": true,
+					"Rate limiting returns 429 after exceeding the limit": true,
+					"Unauthorized response for invalid credentials": false,
+					"Payload contains required fields": true,
+					"Token has not expired": true,
+					"JWT token is valid": true,
+					"Error responses do not expose sensitive information": true
+				},
+				{
+					"Response status code is 200": true,
+					"Response has the required fields": true,
+					"Response status code is 200 for valid requests": true,
+					"Rate limiting returns 429 after exceeding the limit": true,
+					"Unauthorized response for invalid credentials": false,
+					"Payload contains required fields": true,
+					"Token has not expired": true,
+					"JWT token is valid": true,
+					"Error responses do not expose sensitive information": true
+				},
+				{
+					"Response status code is 200": true,
+					"Response has the required fields": true,
+					"Response status code is 200 for valid requests": true,
+					"Rate limiting returns 429 after exceeding the limit": true,
+					"Unauthorized response for invalid credentials": false,
+					"Payload contains required fields": true,
+					"Token has not expired": true,
+					"JWT token is valid": true,
+					"Error responses do not expose sensitive information": true
+				},
+				{
+					"Response status code is 200": true,
+					"Response has the required fields": true,
+					"Response status code is 200 for valid requests": true,
+					"Rate limiting returns 429 after exceeding the limit": true,
+					"Unauthorized response for invalid credentials": false,
+					"Payload contains required fields": true,
+					"Token has not expired": true,
+					"JWT token is valid": true,
+					"Error responses do not expose sensitive information": true
+				},
+				{
+					"Response status code is 200": true,
+					"Response has the required fields": true,
+					"Response status code is 200 for valid requests": true,
+					"Rate limiting returns 429 after exceeding the limit": true,
+					"Unauthorized response for invalid credentials": false,
+					"Payload contains required fields": true,
+					"Token has not expired": true,
+					"JWT token is valid": true,
+					"Error responses do not expose sensitive information": true
+				},
+				{
+					"Response status code is 200": true,
+					"Response has the required fields": true,
+					"Response status code is 200 for valid requests": true,
+					"Rate limiting returns 429 after exceeding the limit": true,
+					"Unauthorized response for invalid credentials": false,
+					"Payload contains required fields": true,
+					"Token has not expired": true,
+					"JWT token is valid": true,
+					"Error responses do not expose sensitive information": true
+				},
+				{
+					"Response status code is 200": true,
+					"Response has the required fields": true,
+					"Response status code is 200 for valid requests": true,
+					"Rate limiting returns 429 after exceeding the limit": true,
+					"Unauthorized response for invalid credentials": false,
+					"Payload contains required fields": true,
+					"Token has not expired": true,
+					"JWT token is valid": true,
+					"Error responses do not expose sensitive information": true
+				},
+				{
+					"Response status code is 200": true,
+					"Response has the required fields": true,
+					"Response status code is 200 for valid requests": true,
+					"Rate limiting returns 429 after exceeding the limit": true,
+					"Unauthorized response for invalid credentials": false,
+					"Payload contains required fields": true,
+					"Token has not expired": true,
+					"JWT token is valid": true,
+					"Error responses do not expose sensitive information": true
+				},
+				{
+					"Response status code is 200": false,
+					"Response has the required fields": false,
+					"Rate limiting message is correct": true,
+					"Rate limiting returns 429 after exceeding the limit": true,
+					"Unauthorized response for invalid credentials": false,
+					"JWT token is valid": false,
+					"Error responses do not expose sensitive information": true
+				},
+				{
+					"Response status code is 200": false,
+					"Response has the required fields": false,
+					"Rate limiting message is correct": true,
+					"Rate limiting returns 429 after exceeding the limit": true,
+					"Unauthorized response for invalid credentials": false,
+					"JWT token is valid": false,
+					"Error responses do not expose sensitive information": true
+				},
+				{
+					"Response status code is 200": false,
+					"Response has the required fields": false,
+					"Rate limiting message is correct": true,
+					"Rate limiting returns 429 after exceeding the limit": true,
+					"Unauthorized response for invalid credentials": false,
+					"JWT token is valid": false,
+					"Error responses do not expose sensitive information": true
+				},
+				{
+					"Response status code is 200": false,
+					"Response has the required fields": false,
+					"Rate limiting message is correct": true,
+					"Rate limiting returns 429 after exceeding the limit": true,
+					"Unauthorized response for invalid credentials": false,
+					"JWT token is valid": false,
+					"Error responses do not expose sensitive information": true
+				},
+				{
+					"Response status code is 200": false,
+					"Response has the required fields": false,
+					"Rate limiting message is correct": true,
+					"Rate limiting returns 429 after exceeding the limit": true,
+					"Unauthorized response for invalid credentials": false,
+					"JWT token is valid": false,
+					"Error responses do not expose sensitive information": true
+				}
+			]
+		}
+	],
+	"count": 15,
+	"totalTime": 87,
+	"collection": {
+		"requests": [
+			{
+				"id": "12d54ba2-2b11-4445-a9c3-34fe65f6f369",
+				"method": "POST"
+			}
+		]
+	}
+}

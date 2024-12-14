@@ -13,6 +13,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSwaggerConfiguration();
+builder.Services.AddRateLimitingConfiguration();
 
 // Add DB configuration
 builder.Services.AddDbContext<AppDbContext>(options => 
@@ -62,9 +63,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseRateLimiter();
+
 app.MapControllers();
 
 app.UseMiddleware<RoleMiddleware>();

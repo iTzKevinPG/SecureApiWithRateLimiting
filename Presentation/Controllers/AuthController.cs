@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using SecureApiWithRateLimiting.Application.DTOs;
 using SecureApiWithRateLimiting.Application.Interfaces;
 using SecureApiWithRateLimiting.Application.Services;
@@ -21,6 +22,7 @@ namespace SecureApiWithRateLimiting.Presentation.Controllers
         }
 
         [HttpPost("login")]
+        [EnableRateLimiting("LowRate")]
         public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
             var user = await _userService.GetUserByUsernameAsync(loginRequest.UserName);
